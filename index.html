@@ -31,8 +31,8 @@ async function loadCorpus(){if(corpus)return corpus;const res=await fetch(corpus
 function chooseText(){let level=cfg.stars;let candidates=[];while(level>=1){candidates=corpus.filter(x=>Number(x.etoiles)===level&&!used.has(String(x.numero??x.titre??x.texte)));if(candidates.length)break;level--;}if(!candidates.length){used.clear();level=cfg.stars;while(level>=1){candidates=corpus.filter(x=>Number(x.etoiles)===level);if(candidates.length)break;level--;}}if(!candidates.length)throw Error('Aucun texte disponible');const item=candidates[Math.floor(Math.random()*candidates.length)];used.add(String(item.numero??item.titre??item.texte));activeText=item;return item.texte.trim().replace(/\r\n/g,'\n');}
 function makeText(){textChars=Array.from(chooseText().replace(/\r/g,''));textOffset=0;textStart=0;textHeight=0;pieces.innerHTML='';prepareTextLines();renderText();}
 function prepareTextLines(){
- const fontSize=Math.max(17,Math.min(27,board.clientHeight*.034));
- const cols=Math.max(12,Math.floor(board.clientWidth*.92/(fontSize*.61)));
+ const fontSize=17.33;
+ const cols=Math.max(12,Math.floor(board.clientWidth*.72/(fontSize*.62)));
  textHeight=Math.max(27,Math.min(42,board.clientHeight*.052));
  textLines=[];let line=[],col=0;
  // On prépare toutes les lignes une seule fois : les lettres tapées ne décalent jamais le texte.
@@ -47,13 +47,13 @@ function prepareTextLines(){
 function skipNewlines(){while(textChars[textOffset]==='\n')textOffset++;}
 function renderText(){
  pieces.innerHTML='';skipNewlines();
- const fontSize=Math.max(17,Math.min(27,board.clientHeight*.034));
+ const fontSize=17.33;
  for(let j=0;j<textLines.length;j++){
   // La première ligne commence tout en bas ; les suivantes attendent SOUS la zone.
   const top=board.clientHeight-textHeight+j*textHeight-textStart*textHeight;
   if(top>board.clientHeight||top< -textHeight)continue;
   const el=document.createElement('div');el.className='textline';
-  el.style.top=top+'px';el.style.left='3%';el.style.width='94%';
+  el.style.top=top+'px';el.style.left='14%';el.style.width='72%';el.style.fontFamily='Verdana,Arial,sans-serif';
   el.style.fontSize=fontSize+'px';el.style.lineHeight=textHeight+'px';
   for(const part of textLines[j]){
    const span=document.createElement('span');
@@ -99,14 +99,17 @@ function key(e){
  if(e.key==='Escape'){if(state==='running'||state==='paused'){e.preventDefault();pause();}return;}
  if(state!=='running'||e.ctrlKey||e.metaKey||e.altKey)return;
  // Les touches mortes produisent un caractère composé : attendre la fin de composition.
- if(e.key==='Dead'){deadKeyPending=true;skipCompositionEnd=false;return;}
+ if(e.key==='Dead'||e.key==='^'||e.key==='¨'){deadKeyPending=true;skipCompositionEnd=false;return;}
  if(e.isComposing||e.key==='Process'||e.key==='Unidentified')return;
  if(e.key.length!==1)return;
  if(deadKeyPending){
   // Certains navigateurs fournissent déjà la lettre accentuée dans keydown.
   const target=cfg.mode==='text'?textChars[textOffset]:letters[typedCount];
-  if(e.key.normalize('NFC')===target?.normalize('NFC')){
-   e.preventDefault();deadKeyPending=false;skipCompositionEnd=true;acceptCharacter(e.key);
+  const composed=e.key.normalize('NFC');
+  const expected=target?.normalize('NFC');
+  const base=expected?.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  if(composed===expected||(base===composed&&base!==expected)){
+   e.preventDefault();deadKeyPending=false;skipCompositionEnd=true;acceptCharacter(expected);
   }
   // Sinon, compositionend fournira la lettre complète : ne pas pénaliser la voyelle.
   return;
