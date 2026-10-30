@@ -75,19 +75,20 @@ async function start(){if(state==='running'||state==='paused')return;cfg=config(
 function finish(reason){if(state!=='running'&&state!=='paused')return;cancelAnimationFrame(raf);state='over';results.push({round,player:cfg.player,mode:cfg.mode,difficulty:cfg.difficulty,stars:cfg.mode==='text'?cfg.stars:null,duration:cfg.unlimited?'Sans limite':cfg.duration,score,reason});overlay(reason+' — Score : '+score);toggleInputs(false);$('start').textContent='Rejouer';$('print').disabled=false;}
 function tick(now){if(state!=='running')return;const dt=Math.min(.1,(now-last)/1000);last=now;if(!cfg.unlimited){remaining-=dt;if(remaining<=0){remaining=0;hud();finish('Temps écoulé');return;}}if(cfg.mode==='text'){textStart+=dt/speed[cfg.difficulty];renderText();if(textReachedTop()){finish('Texte arrivé en haut');return;}}else{const traversal={easy:20,medium:15,hard:10}[cfg.difficulty];const acceleration=cfg.mode==='challenge'?Math.pow(1.075,rowsDone):1;const letterHeight=Math.max(25,board.clientHeight*.055);y+=dt*(board.clientHeight-letterHeight-12)/traversal*acceleration;renderLetters();if(y+Math.max(25,board.clientHeight*.055)>=board.clientHeight){finish('Lettres arrivées en bas');return;}}hud();raf=requestAnimationFrame(tick);}
 let deadKeyPending=false,skipCompositionEnd=false;
+function equivalentCharacter(a,b){const normalize=x=>x.normalize('NFC').replace(/[\u2018\u2019\u02bc\uff07]/g,"'");return normalize(a)===normalize(b);}
 function acceptCharacter(character){
  if(state!=='running'||!character)return;
  const typed=character.normalize('NFC');
  if(cfg.mode==='text'){
   skipNewlines();const target=textChars[textOffset];
   if(target===undefined)return;
-  if(typed===target.normalize('NFC')){
+  if(equivalentCharacter(typed,target)){
    score++;textOffset++;skipNewlines();
    if(textOffset>=textChars.length){try{makeText();}catch(err){finish('Corpus terminé');return;}}
    else renderText();
   }else score--;
  }else{
-  if(typed===letters[typedCount]?.normalize('NFC')){
+  if(equivalentCharacter(typed,letters[typedCount])){
    score++;typedCount++;
    if(typedCount>=letters.length){rowsDone++;newLetters();}
    renderLetters();
@@ -108,7 +109,7 @@ function key(e){
   const composed=e.key.normalize('NFC');
   const expected=target?.normalize('NFC');
   const base=expected?.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-  if(composed===expected||(base===composed&&base!==expected)){
+  if(equivalentCharacter(composed,expected)||(base===composed&&base!==expected)){
    e.preventDefault();deadKeyPending=false;skipCompositionEnd=true;acceptCharacter(expected);
   }
   // Sinon, compositionend fournira la lettre complète : ne pas pénaliser la voyelle.
