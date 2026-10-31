@@ -9,7 +9,7 @@
 
 <label id="specialWrap">Caractères spéciaux<select id="special"><option value="no" selected>Non</option><option value="yes">Oui</option></select></label>
 <label id="starsWrap" class="hidden">Niveau du texte : <span id="starLabel">6</span><input id="stars" type="range" min="1" max="12" value="6"></label>
-</div><div class="hud"><span id="round">Partie 1</span><span id="score">Score : 0</span><span id="clock">03:00</span></div><main id="board" class="board" tabindex="0" aria-label="Zone de jeu"><div class="dangerline"></div><div id="pieces"></div><div class="overlay" id="overlay">Choisissez vos paramètres, puis appuyez sur Start</div></main><div class="actions"><button id="start">Start</button></div><button class="printlink" id="print" disabled>Imprimer / PDF</button><div class="note">Saisie au clavier physique · Une bonne touche : +1 · Une erreur : −1 · Échap : pause</div></div><section id="printable"></section><script>
+</div><div class="hud"><span id="round">Partie 1</span><span id="score">Score : 0</span><span id="clock">03:00</span></div><main id="board" class="board" tabindex="0" aria-label="Zone de jeu"><div class="dangerline"></div><div id="pieces"></div><div class="overlay" id="overlay">Choisissez vos paramètres, puis appuyez sur Start</div></main><div class="actions"><button id="start">Start</button></div><button class="printlink" id="print" disabled>Imprimer / PDF</button><div class="note">© Pierre Lemétayer – 2026</div></div><section id="printable"></section><script>
 'use strict';
 const $=id=>document.getElementById(id), corpusUrl='https://pierreewenlemetayer-dev.github.io/recits/corpus.json';
 const els=['mode','difficulty','duration','special','stars','player'].map($), board=$('board'), pieces=$('pieces');
