@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Letters Invaders — Tapez vite.</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
-:root{font-family:Arial,sans-serif;color:#edf3ff;background:#091426}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,select,input{border-radius:9px;border:1px solid #546988;padding:9px;background:#152a48;color:white}button{cursor:pointer}button:hover{background:#2452a2}button:disabled{opacity:.45;cursor:default}header{text-align:center;padding:8px 12px 2px}h1{font:700 clamp(2rem,5vh,3.5rem) Fredoka,Arial;margin:0;color:#75c9f7;cursor:pointer}header p{margin:0 0 6px;font:500 1.1rem Fredoka}.shell{height:100dvh;display:flex;flex-direction:column;max-width:1450px;margin:auto}.controls{display:flex;gap:9px;align-items:end;justify-content:center;flex-wrap:wrap;padding:5px 12px}.controls label{display:flex;flex-direction:column;gap:3px;font-size:.77rem;color:#bacbe4}.controls select,.controls input{min-height:38px}.controls input[type=checkbox]{min-height:0}.controls .inline{flex-direction:row;align-items:center}.hidden{display:none!important}.hud{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:5px 12px;padding:7px 14px;background:#152a48;border-radius:10px;font:600 1.08rem Fredoka}.board{position:relative;flex:1;min-height:130px;overflow:hidden;margin:0 12px 8px;background:linear-gradient(#10233c,#08101e);border:2px solid #395b84;border-radius:12px}.board:focus{outline:2px solid #70c7f7}.rowletters{position:absolute;left:0;width:100%;display:flex;justify-content:center;gap:clamp(4px,.65vw,12px);white-space:nowrap;font:700 clamp(20px,3.5vh,38px) monospace;will-change:top}.glyph{display:inline-block;min-width:1ch;text-align:center;color:#e8f1ff}.glyph.next{color:#ffd36b;text-decoration:underline}.textlines{position:absolute;left:3%;right:3%;bottom:0;font:600 clamp(17px,2.5vh,27px)/1.55 monospace;white-space:pre-wrap;overflow-wrap:break-word}.textline{position:absolute;width:100%;white-space:pre-wrap;overflow-wrap:break-word}.textline .next{color:#ffd36b;text-decoration:underline}.dangerline{position:absolute;top:0;left:0;right:0;border-top:2px solid #e36c73;pointer-events:none}.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;pointer-events:none;font:600 clamp(1.2rem,3vw,2rem) Fredoka;color:#fff;text-shadow:0 2px 8px #000}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:0 12px 10px}.actions button{font-family:Fredoka;min-width:130px}.printlink{display:block;margin:0 auto 7px;padding:3px 8px;border:0;background:none;color:#b6cdec;text-decoration:underline;text-underline-offset:3px;font-size:.82rem}.printlink:hover{background:none;color:white}.printlink:disabled{opacity:.35;text-decoration:none;cursor:default}.note{text-align:center;font-size:.75rem;color:#a9bbd5;padding-bottom:5px}@media print{body{background:white;color:black}.shell{display:none!important}#printable{display:block!important;padding:20px;font:14px Arial}table{border-collapse:collapse;width:100%}td,th{border:1px solid #999;padding:9px}}#printable{display:none}
+:root{font-family:Arial,sans-serif;color:#edf3ff;background:#091426}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,select,input{border-radius:9px;border:1px solid #546988;padding:9px;background:#152a48;color:white}button{cursor:pointer}button:hover{background:#2452a2}button:disabled{opacity:.45;cursor:default}header{text-align:center;padding:8px 12px 2px}h1{font:700 clamp(2rem,5vh,3.5rem) Fredoka,Arial;margin:0;color:#75c9f7;cursor:pointer}header p{margin:0 0 6px;font:500 1.1rem Fredoka}.shell{height:100dvh;display:flex;flex-direction:column;max-width:1450px;margin:auto}.controls{display:flex;gap:9px;align-items:end;justify-content:center;flex-wrap:wrap;padding:5px 12px}.controls label{display:flex;flex-direction:column;gap:3px;font-size:.77rem;color:#bacbe4}.controls select,.controls input{min-height:38px}.controls input[type=checkbox]{min-height:0}.controls .inline{flex-direction:row;align-items:center}.hidden{display:none!important}.hud{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:5px 12px;padding:7px 14px;background:#152a48;border-radius:10px;font:600 1.08rem Fredoka}.board{position:relative;flex:1;min-height:130px;overflow:hidden;margin:0 12px 8px;background:linear-gradient(#10233c,#08101e);border:2px solid #395b84;border-radius:12px}.board:focus{outline:2px solid #70c7f7}.rowletters{position:absolute;left:0;width:100%;display:flex;justify-content:center;gap:clamp(4px,.65vw,12px);white-space:nowrap;font:700 clamp(20px,3.5vh,38px) monospace;will-change:top}.glyph{display:inline-block;min-width:1ch;text-align:center;color:#e8f1ff}.glyph.next{color:#ffd36b;text-decoration:underline}.textlines{position:absolute;left:3%;right:3%;bottom:0;font:600 clamp(17px,2.5vh,27px)/1.55 monospace;white-space:pre-wrap;overflow-wrap:break-word}.textline{position:absolute;width:100%;white-space:pre;overflow-wrap:normal}.textline .next{color:#ffd36b;text-decoration:underline}.dangerline{position:absolute;top:0;left:0;right:0;border-top:2px solid #e36c73;pointer-events:none}.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;pointer-events:none;font:600 clamp(1.2rem,3vw,2rem) Fredoka;color:#fff;text-shadow:0 2px 8px #000}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:0 12px 10px}.actions button{font-family:Fredoka;min-width:130px}.printlink{display:block;margin:0 auto 7px;padding:3px 8px;border:0;background:none;color:#b6cdec;text-decoration:underline;text-underline-offset:3px;font-size:.82rem}.printlink:hover{background:none;color:white}.printlink:disabled{opacity:.35;text-decoration:none;cursor:default}.note{text-align:center;font-size:.75rem;color:#a9bbd5;padding-bottom:5px}@media print{body{background:white;color:black}.shell{display:none!important}#printable{display:block!important;padding:20px;font:14px Arial}table{border-collapse:collapse;width:100%}td,th{border:1px solid #999;padding:9px}}#printable{display:none}
 </style></head><body><div class="shell"><header><h1 id="home" tabindex="0" title="Retour à l'accueil">Letters Invaders</h1><p>Tapez vite.</p></header><div class="controls">
 <label>Joueur<input id="player" placeholder="Votre nom" maxlength="70"></label>
 <label>Mode<select id="mode"><option value="normal">Normal</option><option value="challenge">Défi</option><option value="text">Texte</option></select></label>
@@ -32,17 +32,34 @@ function chooseText(){let level=cfg.stars;let candidates=[];while(level>=1){cand
 function makeText(){textChars=Array.from(chooseText().replace(/\r/g,''));textOffset=0;textStart=0;textHeight=0;pieces.innerHTML='';prepareTextLines();renderText();}
 function prepareTextLines(){
  const fontSize=17.33;
- const cols=Math.max(12,Math.floor(board.clientWidth*.72/(fontSize*.62)));
+ const availableWidth=board.clientWidth*.84;
+ const measure=document.createElement('canvas').getContext('2d');
+ measure.font=fontSize+'px Verdana';
  textHeight=Math.max(27,Math.min(42,board.clientHeight*.052));
- textLines=[];let line=[],col=0;
- // On prépare toutes les lignes une seule fois : les lettres tapées ne décalent jamais le texte.
- for(let i=0;i<textChars.length;i++){
-  const c=textChars[i];
-  if(c==='\n'){if(line.length)textLines.push(line);line=[];col=0;continue;}
-  if(col>=cols){textLines.push(line);line=[];col=0;}
-  line.push({c,i});col++;
+ textLines=[];let line=[],lineWidth=0;
+ const flush=()=>{if(line.length){textLines.push(line);line=[];lineWidth=0;}};
+ const append=(start,end)=>{
+  for(let k=start;k<end;k++){line.push({c:textChars[k],i:k});}
+  lineWidth+=measure.measureText(textChars.slice(start,end).join('')).width;
+ };
+ // Grouper les mots et leurs espaces : ne couper un mot que s'il dépasse à lui seul la largeur.
+ let i=0;
+ while(i<textChars.length){
+  if(textChars[i]==='\n'){flush();i++;continue;}
+  const start=i;
+  if(/\s/.test(textChars[i])){while(i<textChars.length&&textChars[i]!=='\n'&&/\s/.test(textChars[i]))i++;}
+  else{while(i<textChars.length&&!/\s/.test(textChars[i]))i++;}
+  const chunk=textChars.slice(start,i).join('');
+  const width=measure.measureText(chunk).width;
+  if(line.length&&lineWidth+width>availableWidth)flush();
+  if(width<=availableWidth){append(start,i);continue;}
+  for(let k=start;k<i;k++){
+   const charWidth=measure.measureText(textChars[k]).width;
+   if(line.length&&lineWidth+charWidth>availableWidth)flush();
+   append(k,k+1);
+  }
  }
- if(line.length)textLines.push(line);
+ flush();
 }
 function skipNewlines(){while(textChars[textOffset]==='\n')textOffset++;}
 function renderText(){
@@ -53,7 +70,7 @@ function renderText(){
   const top=board.clientHeight-textHeight+j*textHeight-textStart*textHeight;
   if(top>board.clientHeight||top< -textHeight)continue;
   const el=document.createElement('div');el.className='textline';
-  el.style.top=top+'px';el.style.left='14%';el.style.width='72%';el.style.fontFamily='Verdana,Arial,sans-serif';
+  el.style.top=top+'px';el.style.left='8%';el.style.width='84%';el.style.fontFamily='Verdana,Arial,sans-serif';
   el.style.fontSize=fontSize+'px';el.style.lineHeight=textHeight+'px';
   for(const part of textLines[j]){
    const span=document.createElement('span');
