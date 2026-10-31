@@ -14,7 +14,7 @@
 const $=id=>document.getElementById(id), corpusUrl='https://pierreewenlemetayer-dev.github.io/recits/corpus.json';
 const els=['mode','difficulty','duration','special','stars','player'].map($), board=$('board'), pieces=$('pieces');
 let state='ready',score=0,round=1,remaining=180,last=0,raf=0,rowsDone=0,letters=[],typedCount=0,y=0,textChars=[],textStart=0,textOffset=0,textHeight=0,textQueue=[],textLines=[],used=new Set(),results=[],corpus=null,activeText=null;
-const speed={easy:15,medium:10,hard:7,expert:5};
+const speed={easy:20,medium:15,hard:10,expert:7};
 const glyphs='abcdefghijklmnopqrstuvwxyz',extras='éèêëàâùûîïôç0123456789,;:!?';
 function config(){return {mode:$('mode').value,difficulty:$('difficulty').value,duration:($('duration').value==='unlimited'?180:Number($('duration').value)),unlimited:$('mode').value==='challenge'&&$('duration').value==='unlimited',special:$('special').value==='yes',stars:Number($('stars').value),player:$('player').value.trim()||'Anonyme'};}
 let cfg=config();
